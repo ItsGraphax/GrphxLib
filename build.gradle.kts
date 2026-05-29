@@ -17,4 +17,12 @@ java {
     withSourcesJar()
 }
 
+publishing {
+    publications {
+        create<MavenPublication>("GrphxLib") {
+            from(components["java"])
+        }
+    }
+}
+
 tasks {}
