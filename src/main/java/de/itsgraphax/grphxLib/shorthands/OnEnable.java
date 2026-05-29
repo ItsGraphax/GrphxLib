@@ -1,4 +1,4 @@
-package de.itsgraphax.grphxLib;
+package de.itsgraphax.grphxLib.shorthands;
 
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
