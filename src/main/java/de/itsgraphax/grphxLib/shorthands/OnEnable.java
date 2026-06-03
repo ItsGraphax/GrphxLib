@@ -18,7 +18,7 @@ public class OnEnable {
      * @param listeners A collection of Listener classes to register
      * @param plugin The plugin they get registered from
      */
-    public void registerEvents(Collection<Listener> listeners, JavaPlugin plugin) {
+    public static void registerEvents(Collection<Listener> listeners, JavaPlugin plugin) {
         PluginManager pm = plugin.getServer().getPluginManager();
         listeners.forEach((listener) -> pm.registerEvents(listener, plugin));
     }
@@ -28,7 +28,7 @@ public class OnEnable {
      * @param consumers A collection of Consumers that accept a Commands instance
      * @param plugin The plugin they get registered from
      */
-    public void registerCommands(Collection<Consumer<Commands>> consumers, JavaPlugin plugin) {
+    public static void registerCommands(Collection<Consumer<Commands>> consumers, JavaPlugin plugin) {
         plugin.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS.newHandler(event -> {
             Commands r = event.registrar();
             consumers.forEach((consumer) -> consumer.accept(r));
