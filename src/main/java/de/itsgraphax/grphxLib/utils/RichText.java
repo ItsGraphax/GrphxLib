@@ -69,7 +69,7 @@ public class RichText {
         public @NotNull Component paramsFromConfig(@NotNull String subkey, String... params) {
             if (params.length % 2 != 0) throw new IllegalArgumentException("The number of params needs to consist of a key, then value; for example ('POINTS', points, 'NAME', name)");
             String richText = config.getString("strings." + subkey, String.format("!%s%s", subkey, Arrays.toString(params)));
-            return paramsParse(richText);
+            return paramsParse(richText, params);
         }
     }
 }
