@@ -12,8 +12,16 @@ public class Graphies {
         return Set.of(o);
     }
 
+    public static <T> Set<T> setOf() {
+        return Set.of();
+    }
+
     @SafeVarargs
     public static <T> List<T> listOf(T... o) {
         return List.of(o);
+    }
+
+    public static <T> List<T> listOf() {
+        return List.of();
     }
 }
