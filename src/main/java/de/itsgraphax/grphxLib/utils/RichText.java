@@ -41,6 +41,10 @@ public class RichText {
         return parse(richMessage);
     }
 
+    public @NotNull String serialize(@NotNull Component component) {
+        return miniMessage.serialize(component);
+    }
+
     /**
      * A dereviation of RichText with another shorthand for getting a string direct out of the plugin config.
      */
