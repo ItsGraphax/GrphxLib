@@ -7,7 +7,7 @@ import org.bukkit.persistence.PersistentDataHolder;
  *  A boilerplate class for making getters and setters for PersistentDataContainer operations
  */
 public abstract class PdcData {
-    protected final Namespaces namespaces;
+    protected final NamespacesBase namespaces;
 
     /**
      * Returns the PDC of a PersistentDataHolder
@@ -18,7 +18,7 @@ public abstract class PdcData {
         return holder.getPersistentDataContainer();
     }
 
-    public PdcData(Namespaces namespaces) {
+    public PdcData(NamespacesBase namespaces) {
         this.namespaces = namespaces;
     }
 }
