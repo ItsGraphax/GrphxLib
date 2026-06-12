@@ -6,7 +6,7 @@ import org.bukkit.persistence.PersistentDataHolder;
 /**
  * A boilerplate class for making getters and setters for PersistentDataContainer operations
  */
-public abstract class PdcData {
+public abstract class PdcDataBase {
     /**
      * Returns the PDC of a PersistentDataHolder
      *
@@ -17,6 +17,6 @@ public abstract class PdcData {
         return holder.getPersistentDataContainer();
     }
 
-    public PdcData() {
+    public PdcDataBase() {
     }
 }
