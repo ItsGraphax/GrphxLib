@@ -1,5 +1,6 @@
 package de.itsgraphax.grphxLib.citems;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -34,26 +35,28 @@ public abstract class Citem {
     public @NotNull ItemStack createItem() {
         return item.clone();
     }
+
     public void createItem(@NotNull ItemStack item) {
         ItemStack copy = item.clone();
 
         copy.setAmount(1);
         copy.editMeta(meta -> {
             meta.setItemModel(key);
+            meta.displayName(Component.translatable(key.getNamespace() + "." + key.getKey()).decorate());
         });
-        copy.editPersistentDataContainer(pdc -> {
-            pdc.set(customItemNamespace, PersistentDataType.STRING, key.toString());
-        });
+        copy.editPersistentDataContainer(pdc -> pdc.set(customItemNamespace, PersistentDataType.STRING, key.toString()));
 
         this.item = copy;
     }
+
     public void editItem(@NotNull Consumer<ItemStack> consumer) {
         ItemStack copy = item.clone();
         consumer.accept(copy);
         createItem(copy); // verify values
     }
 
-    public void onInteract(@NotNull PlayerInteractEvent event) {}
+    public void onInteract(@NotNull PlayerInteractEvent event) {
+    }
 
     protected void consume(@NotNull PlayerInteractEvent event) {
         ItemStack item = event.getItem();
@@ -64,7 +67,7 @@ public abstract class Citem {
     public boolean isItem(@Nullable ItemStack item) {
         if (item == null) return false;
         return Objects.equals(item.getPersistentDataContainer()
-                .get(customItemNamespace, PersistentDataType.STRING),
+                        .get(customItemNamespace, PersistentDataType.STRING),
                 key.toString());
     }
 }
