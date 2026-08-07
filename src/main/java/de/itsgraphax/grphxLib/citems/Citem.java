@@ -13,7 +13,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public abstract class Citem {
-    protected static final NamespacedKey customItemNamespace = new NamespacedKey("grphxlib", "customItem");
+    protected static final NamespacedKey customItemNamespace = new NamespacedKey("grphxlib", "customitem");
 
     protected final NamespacedKey key;
     protected ItemStack item;
