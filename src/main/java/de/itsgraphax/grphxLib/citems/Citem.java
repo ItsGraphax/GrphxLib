@@ -1,5 +1,7 @@
 package de.itsgraphax.grphxLib.citems;
 
+import io.papermc.paper.datacomponent.DataComponentType;
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -22,9 +24,7 @@ public abstract class Citem {
         this.key = key;
 
         ItemStack defaultItem = ItemStack.of(Material.POISONOUS_POTATO);
-        defaultItem.editMeta(meta -> {
-            meta.setFood(null);
-        });
+        defaultItem.unsetData(DataComponentTypes.CONSUMABLE);
         setItem(defaultItem);
     }
 
@@ -40,10 +40,9 @@ public abstract class Citem {
         ItemStack copy = item.clone();
 
         copy.setAmount(1);
-        copy.editMeta(meta -> {
-            meta.setItemModel(key);
-            meta.displayName(Component.translatable(key.getNamespace() + "." + key.getKey()).decorate());
-        });
+        copy.setData(DataComponentTypes.ITEM_MODEL, key);
+        Component translation = Component.translatable(key.getNamespace() + "." + key.getKey()).decorate();
+        copy.setData(DataComponentTypes.CUSTOM_NAME, translation);
         copy.editPersistentDataContainer(pdc -> pdc.set(customItemNamespace, PersistentDataType.STRING, key.toString()));
 
         this.item = copy;
