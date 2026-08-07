@@ -1,6 +1,5 @@
 package de.itsgraphax.grphxLib.citems;
 
-import io.papermc.paper.event.player.PrePlayerAttackEntityEvent;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,15 +17,15 @@ public class CitemListener implements Listener {
     @EventHandler
     void onInteract(PlayerInteractEvent event) {
         if (event.useInteractedBlock() == Event.Result.ALLOW) return;
-
+        System.out.println("1");
         if (event.getHand() != EquipmentSlot.HAND) return;
-
+        System.out.println("2");
         ItemStack item = event.getItem();
         if (item == null) return;
-
+        System.out.println("3");
         Citem citem = manager.fromItem(event.getItem());
         if (citem == null) return;
-
+        System.out.println("4");
         citem.onInteract(event);
     }
 }
