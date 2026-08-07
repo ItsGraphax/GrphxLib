@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CitemManager {
-    protected static final NamespacedKey customItemNamespace = new NamespacedKey("grphxLib", "customItem");
+    protected static final NamespacedKey customItemNamespace = new NamespacedKey("grphxlib", "customItem");
 
     protected final Map<NamespacedKey, Citem> citems = new HashMap<>();
 
