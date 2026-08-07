@@ -32,6 +32,11 @@ public class RichText {
         return miniMessage.deserialize(richMessage);
     }
 
+    public @NotNull Component translatable(@NotNull String key, String... params) {
+        if (params.length == 0) return parse(String.format("<lang:%s>", key));
+        else return parse(String.format("<lang:%s:'%s'>", key, String.join("':'", params)));
+    }
+
     /**
      * @deprecated This is now an alias for parse, with the same function
      */
