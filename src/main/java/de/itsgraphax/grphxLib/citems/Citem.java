@@ -25,7 +25,7 @@ public abstract class Citem {
         defaultItem.editMeta(meta -> {
             meta.setFood(null);
         });
-        createItem(defaultItem);
+        setItem(defaultItem);
     }
 
     public @NotNull NamespacedKey key() {
@@ -36,7 +36,7 @@ public abstract class Citem {
         return item.clone();
     }
 
-    public void createItem(@NotNull ItemStack item) {
+    public void setItem(@NotNull ItemStack item) {
         ItemStack copy = item.clone();
 
         copy.setAmount(1);
@@ -52,7 +52,7 @@ public abstract class Citem {
     public void editItem(@NotNull Consumer<ItemStack> consumer) {
         ItemStack copy = item.clone();
         consumer.accept(copy);
-        createItem(copy); // verify values
+        setItem(copy); // verify values
     }
 
     public void onInteract(@NotNull PlayerInteractEvent event) {
