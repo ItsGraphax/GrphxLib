@@ -18,7 +18,7 @@ public class OnEnable {
      * @param listeners A collection of Listener classes to register
      * @param plugin The plugin they get registered from
      */
-    public static void registerEvents(Collection<Listener> listeners, JavaPlugin plugin) {
+    public static void registerEvents(Collection<? extends Listener> listeners, JavaPlugin plugin) {
         PluginManager pm = plugin.getServer().getPluginManager();
         listeners.forEach((listener) -> pm.registerEvents(listener, plugin));
     }
