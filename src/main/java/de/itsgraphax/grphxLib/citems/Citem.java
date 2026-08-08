@@ -1,6 +1,5 @@
 package de.itsgraphax.grphxLib.citems;
 
-import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
@@ -40,12 +39,15 @@ public abstract class Citem {
         ItemStack copy = item.clone();
 
         copy.setAmount(1);
-        copy.setData(DataComponentTypes.ITEM_MODEL, key);
-        Component translation = Component.translatable(key.getNamespace() + "." + key.getKey()).decorate();
-        copy.setData(DataComponentTypes.CUSTOM_NAME, translation);
         copy.editPersistentDataContainer(pdc -> pdc.set(customItemNamespace, PersistentDataType.STRING, key.toString()));
 
         this.item = copy;
+    }
+
+    public void resourceifyItem() {
+        item.setData(DataComponentTypes.ITEM_MODEL, key);
+        Component translation = Component.translatable(key.getNamespace() + "." + key.getKey()).decorate();
+        item.setData(DataComponentTypes.CUSTOM_NAME, translation);
     }
 
     public void editItem(@NotNull Consumer<ItemStack> consumer) {
