@@ -25,6 +25,7 @@ public abstract class Citem {
         ItemStack defaultItem = ItemStack.of(Material.POISONOUS_POTATO);
         defaultItem.unsetData(DataComponentTypes.CONSUMABLE);
         setItem(defaultItem);
+        resourceifyItem();
     }
 
     public @NotNull NamespacedKey key() {
