@@ -48,7 +48,7 @@ public abstract class Citem {
     public void resourceifyItem() {
         item.setData(DataComponentTypes.ITEM_MODEL, key);
         Component translation = Component.translatable(key.getNamespace() + "." + key.getKey()).decorate();
-        item.setData(DataComponentTypes.CUSTOM_NAME, translation);
+        item.setData(DataComponentTypes.ITEM_NAME, translation);
     }
 
     public void editItem(@NotNull Consumer<ItemStack> consumer) {
