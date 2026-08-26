@@ -1,11 +1,13 @@
 package de.itsgraphax.grphxLib.citems;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.*;
+import org.bukkit.inventory.CraftingInventory;
+import org.bukkit.inventory.CraftingRecipe;
+import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Set;
 
@@ -18,8 +20,6 @@ public class CitemListener implements Listener {
 
     @EventHandler
     void onInteract(PlayerInteractEvent event) {
-        if (event.useInteractedBlock() == Event.Result.ALLOW) return;
-
         if (event.getHand() != EquipmentSlot.HAND) return;
         ItemStack item = event.getItem();
         if (item == null) return;
@@ -33,12 +33,14 @@ public class CitemListener implements Listener {
     @EventHandler
     void onPrepareCraft(PrepareItemCraftEvent event) {
         if (event.getRecipe() instanceof CraftingRecipe recipe) {
+            CraftingInventory inv = event.getInventory();
+
             Set<CrecipeOverride> overrides = manager.getOverrides(recipe.getKey());
             if (overrides == null) return;
+
             for (CrecipeOverride override : overrides) {
-                ItemStack item = event.getInventory().getItem(override.slot());
-                if (!override.citem().isItem(item)) {
-                    event.getInventory().setResult(null);
+                if (!override.isValid.apply(inv)) {
+                    inv.setResult(null);
                     return;
                 }
             }

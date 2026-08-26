@@ -1,3 +1,13 @@
 package de.itsgraphax.grphxLib.citems;
 
-public final record CrecipeOverride(Citem citem, int slot) {}
+import org.bukkit.inventory.CraftingInventory;
+
+import java.util.function.Function;
+
+public class CrecipeOverride {
+    protected final Function<CraftingInventory, Boolean> isValid;
+
+    public CrecipeOverride(Function<CraftingInventory, Boolean> isValid) {
+        this.isValid = isValid;
+    }
+}

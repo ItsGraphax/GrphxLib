@@ -1,7 +1,6 @@
 package de.itsgraphax.grphxLib.citems;
 
 import de.itsgraphax.grphxLib.citems.exceptions.DuplicateCitemException;
-import it.unimi.dsi.fastutil.Hash;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
