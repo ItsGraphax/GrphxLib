@@ -53,10 +53,12 @@ public class RichText {
      * A dereviation of RichText with another shorthand for getting a string direct out of the plugin config.
      */
     public static class RichConfigText extends RichText {
-        protected final FileConfiguration config;
+        protected FileConfiguration config;
+        protected JavaPlugin plugin;
 
         public RichConfigText(JavaPlugin plugin) {
-            this.config = plugin.getConfig();
+            this.plugin = plugin;
+            reloadConfig();
         }
 
         /**
@@ -77,6 +79,10 @@ public class RichText {
         @Deprecated(since="1.1.0", forRemoval = true)
         public @NotNull Component paramsFromConfig(@NotNull String subkey, String... params) {
             return fromConfig(subkey, params);
+        }
+
+        public void reloadConfig() {
+            config = plugin.getConfig();
         }
     }
 }
