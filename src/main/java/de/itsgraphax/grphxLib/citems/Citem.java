@@ -2,6 +2,7 @@ package de.itsgraphax.grphxLib.citems;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import net.kyori.adventure.text.Component;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -61,9 +62,14 @@ public abstract class Citem {
     }
 
     protected void consume(@NotNull PlayerInteractEvent event) {
+        consume(event, 1);
+    }
+
+    protected void consume(@NotNull PlayerInteractEvent event, int amount) {
+        if (event.getPlayer().getGameMode() == GameMode.CREATIVE) return;
         ItemStack item = event.getItem();
         if (item == null) throw new RuntimeException("Item from PlayerInteractEvent is null");
-        item.setAmount(item.getAmount() - 1);
+        item.setAmount(item.getAmount() - amount);
     }
 
     public boolean isItem(@Nullable ItemStack item) {
