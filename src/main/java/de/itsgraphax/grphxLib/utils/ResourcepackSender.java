@@ -36,7 +36,7 @@ public class ResourcepackSender implements Listener {
                     request, HttpResponse.BodyHandlers.ofString()
             );
 
-            if (response.statusCode() != 404) {
+            if (response.statusCode() != 200) {
                 throw new RuntimeException(String.format("Hash request to server returned %s", response.statusCode()));
             }
 
