@@ -50,7 +50,7 @@ public class ResourcepackSender implements Listener {
     }
 
     protected URI makeUri(String prefix) {
-        return URI.create(String.format("http://server.itsgraphax.de:80/%s%s/%s", prefix, subdir, uuid));
+        return URI.create(String.format("http://server.itsgraphax.de:80/%s%s/%s.zip", prefix, subdir, uuid));
     }
 
     @EventHandler
