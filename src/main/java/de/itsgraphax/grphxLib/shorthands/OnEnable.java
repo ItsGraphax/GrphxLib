@@ -7,34 +7,31 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.function.Consumer;
 
 /**
  * A class with multiple utility shorthands for doing stuff in the JavaPlugin onEnable
  */
 public class OnEnable {
-    /**
-     * Registers all given listeners
-     *
-     * @param listeners A collection of Listener classes to register
-     * @param plugin    The plugin they get registered from
-     */
     public static void registerEvents(JavaPlugin plugin, Listener... listeners) {
-        PluginManager pm = plugin.getServer().getPluginManager();
-        Arrays.stream(listeners).forEach(listener -> pm.registerEvents(listener, plugin));
+        registerEvents(plugin, Arrays.asList(listeners));
     }
 
-    /**
-     * Registers all given commands
-     *
-     * @param consumers A collection of Consumers that accept a Commands instance
-     * @param plugin    The plugin they get registered from
-     */
+    public static void registerEvents(JavaPlugin plugin, Collection<Listener> listeners) {
+        PluginManager pm = plugin.getServer().getPluginManager();
+        listeners.forEach(listener -> pm.registerEvents(listener, plugin));
+    }
+
     @SafeVarargs
     public static void registerCommands(JavaPlugin plugin, Consumer<Commands>... consumers) {
+        registerCommands(plugin, Arrays.asList(consumers));
+    }
+
+    public static void registerCommands(JavaPlugin plugin, Collection<Consumer<Commands>> consumers) {
         plugin.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS.newHandler(event -> {
             Commands r = event.registrar();
-            Arrays.stream(consumers).forEach(consumer -> consumer.accept(r));
+           consumers.forEach(consumer -> consumer.accept(r));
         }));
     }
 }
