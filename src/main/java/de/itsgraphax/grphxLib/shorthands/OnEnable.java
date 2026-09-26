@@ -18,7 +18,7 @@ public class OnEnable {
         registerEvents(plugin, Arrays.asList(listeners));
     }
 
-    public static void registerEvents(JavaPlugin plugin, Collection<Listener> listeners) {
+    public static void registerEvents(JavaPlugin plugin, Collection<? extends Listener> listeners) {
         PluginManager pm = plugin.getServer().getPluginManager();
         listeners.forEach(listener -> pm.registerEvents(listener, plugin));
     }
