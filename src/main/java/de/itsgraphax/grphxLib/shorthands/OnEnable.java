@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.function.Consumer;
 
 /**
@@ -15,23 +15,26 @@ import java.util.function.Consumer;
 public class OnEnable {
     /**
      * Registers all given listeners
+     *
      * @param listeners A collection of Listener classes to register
-     * @param plugin The plugin they get registered from
+     * @param plugin    The plugin they get registered from
      */
-    public static void registerEvents(Collection<? extends Listener> listeners, JavaPlugin plugin) {
+    public static void registerEvents(JavaPlugin plugin, Listener... listeners) {
         PluginManager pm = plugin.getServer().getPluginManager();
-        listeners.forEach((listener) -> pm.registerEvents(listener, plugin));
+        Arrays.stream(listeners).forEach(listener -> pm.registerEvents(listener, plugin));
     }
 
     /**
      * Registers all given commands
+     *
      * @param consumers A collection of Consumers that accept a Commands instance
-     * @param plugin The plugin they get registered from
+     * @param plugin    The plugin they get registered from
      */
-    public static void registerCommands(Collection<Consumer<Commands>> consumers, JavaPlugin plugin) {
+    @SafeVarargs
+    public static void registerCommands(JavaPlugin plugin, Consumer<Commands>... consumers) {
         plugin.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS.newHandler(event -> {
             Commands r = event.registrar();
-            consumers.forEach((consumer) -> consumer.accept(r));
+            Arrays.stream(consumers).forEach(consumer -> consumer.accept(r));
         }));
     }
 }
