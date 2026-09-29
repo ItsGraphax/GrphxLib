@@ -17,13 +17,15 @@ public class ResourcepackSender implements Listener {
     protected final String subdir;
     protected final UUID uuid;
     protected final URI uri;
-    protected final String hash;
+    protected String hash;
 
     public ResourcepackSender(String subdir, UUID uuid) {
         this.subdir = subdir;
         this.uuid = uuid;
         this.uri = makeUri("");
+    }
 
+    public void updateHash() {
         // Get hash
         try {
             HttpClient client = HttpClient.newHttpClient();
@@ -50,11 +52,12 @@ public class ResourcepackSender implements Listener {
     }
 
     protected URI makeUri(String prefix) {
-        return URI.create(String.format("http://server.itsgraphax.de:80/%s%s/%s.zip", prefix, subdir, uuid));
+        return URI.create(String.format("https://vps.itsgraphax.de/%s%s/%s.zip", prefix, subdir, uuid));
     }
 
     @EventHandler
     void onJoin(PlayerJoinEvent e) {
+        updateHash();
         e.getPlayer().sendResourcePacks(ResourcePackRequest
                 .resourcePackRequest()
                 .replace(false)
