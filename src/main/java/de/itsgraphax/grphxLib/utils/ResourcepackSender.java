@@ -11,17 +11,20 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 public class ResourcepackSender implements Listener {
     protected final String subdir;
+    protected final String id;
     protected final UUID uuid;
     protected final URI uri;
     protected String hash;
 
-    public ResourcepackSender(String subdir, UUID uuid) {
+    public ResourcepackSender(String subdir, String id) {
         this.subdir = subdir;
-        this.uuid = uuid;
+        this.id = id;
+        this.uuid = UUID.nameUUIDFromBytes(id.getBytes(StandardCharsets.UTF_8));
         this.uri = makeUri("");
     }
 
@@ -52,7 +55,7 @@ public class ResourcepackSender implements Listener {
     }
 
     protected URI makeUri(String prefix) {
-        return URI.create(String.format("https://vps.itsgraphax.de/%s%s/%s.zip", prefix, subdir, uuid));
+        return URI.create(String.format("https://vps.itsgraphax.de/%s%s/%s.zip", prefix, subdir, id));
     }
 
     @EventHandler
