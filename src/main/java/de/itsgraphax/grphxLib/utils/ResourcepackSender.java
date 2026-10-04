@@ -24,7 +24,7 @@ public class ResourcepackSender implements Listener {
     public ResourcepackSender(String subdir, String id) {
         this.subdir = subdir;
         this.id = id;
-        this.uuid = UUID.nameUUIDFromBytes(id.getBytes(StandardCharsets.UTF_8));
+        this.uuid = UUID.nameUUIDFromBytes((subdir + "/" + id).getBytes(StandardCharsets.UTF_8));
         this.uri = makeUri("");
     }
 
