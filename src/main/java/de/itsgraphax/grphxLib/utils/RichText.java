@@ -54,7 +54,7 @@ public class RichText {
      */
     public static class RichConfigText extends RichText {
         protected FileConfiguration config;
-        protected JavaPlugin plugin;
+        protected final JavaPlugin plugin;
 
         public RichConfigText(JavaPlugin plugin) {
             this.plugin = plugin;

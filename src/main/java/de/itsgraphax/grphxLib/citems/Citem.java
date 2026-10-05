@@ -58,6 +58,7 @@ public abstract class Citem {
         setItem(copy); // verify values
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void onInteract(@NotNull PlayerInteractEvent event) {
     }
 
@@ -65,7 +66,7 @@ public abstract class Citem {
         consume(event, 1);
     }
 
-    protected void consume(@NotNull PlayerInteractEvent event, int amount) {
+    protected void consume(@NotNull PlayerInteractEvent event, @SuppressWarnings("SameParameterValue") int amount) {
         if (event.getPlayer().getGameMode() == GameMode.CREATIVE) return;
         ItemStack item = event.getItem();
         if (item == null) throw new RuntimeException("Item from PlayerInteractEvent is null");

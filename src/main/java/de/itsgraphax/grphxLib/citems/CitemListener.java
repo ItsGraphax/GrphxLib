@@ -21,6 +21,7 @@ public class CitemListener implements Listener {
     @EventHandler
     void onInteract(PlayerInteractEvent event) {
         if (event.getHand() != EquipmentSlot.HAND) return;
+        if (!event.getAction().isRightClick()) return;
         ItemStack item = event.getItem();
         if (item == null) return;
 
